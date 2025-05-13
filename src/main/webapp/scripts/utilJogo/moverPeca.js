@@ -16,9 +16,15 @@ socket.onmessage = function(event){
 }
 
 function moverPeca(celulaOrigem,celula){
-	if (celulaOrigem && celulaOrigem.querySelector('img')) {
+	if (celulaOrigem && celulaOrigem.querySelector('.container-peca')) {
 		
-		let mensagem = {"nomeDeUsuario":nomeDeUsuario,"idPartida":idPartida,"acao":"movimentoMago","idOrigem":celulaOrigem.id,"idDestino":celula.id,"magia":{}};
+		let mensagem = {
+			"nomeDeUsuario":nomeDeUsuario,
+			"idPartida":idPartida,
+			"acao":"movimentoMago",
+			"idOrigem":celulaOrigem.id,
+			"idDestino":celula.id,"magia":{}
+		};
 		
 		if(socket.readyState==WebSocket.OPEN){
 			enviarMensagem(mensagem,socket)

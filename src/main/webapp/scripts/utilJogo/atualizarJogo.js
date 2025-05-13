@@ -25,9 +25,10 @@ function atualizarJogo(jogo){
 			if(jogo.tabuleiro[i][j]){
 				let nomePeca = jogo.tabuleiro[i][j].nomeDaPeca;
 				let imagemSrc = pecas[nomePeca].src;
+				let manaPeca = jogo.tabuleiro[i][j].manaDaPeca;
 				if (imagemSrc && nomePeca!='bloco') {
 					console.log("criando axionauta");
-					anexarImagemMagoNaCelula(`celula-${i}${j}`, imagemSrc);
+					anexarImagemMagoNaCelula(`celula-${i}${j}`, imagemSrc, manaPeca);
 				}
 				else if(imagemSrc && nomePeca=='bloco'){
 					console.log("criando bloco");
