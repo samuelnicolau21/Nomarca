@@ -3,6 +3,7 @@ import {moverPeca} from './moverPeca.js';
 
 sessionStorage.setItem("cor1",2);
 sessionStorage.setItem("cor2",2);
+sessionStorage.setItem("cor_bloco",'madeira_escura')
 
 const tabuleiro = document.querySelector('.tabuleiro');
 

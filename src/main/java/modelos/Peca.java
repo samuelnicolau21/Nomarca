@@ -2,6 +2,7 @@ package modelos;
 
 public class Peca{
 	public String nomeDaPeca;
+	public String tipoDaPeca;
 	public int manaDaPeca;
 	public String donoOriginalDaPeca;
 	public String donoTemporarioDaPeca;
@@ -10,8 +11,9 @@ public class Peca{
 	public int linhaDaPeca;
 	public int distanciaDeLocomocao;
 	
-	public Peca(String nomeDaPeca, String donoOriginalDaPeca, String donoTemporarioDaPeca, int colunaDaPeca, int linhaDaPeca){
+	public Peca(String nomeDaPeca, String tipoDaPeca, String donoOriginalDaPeca, String donoTemporarioDaPeca, int colunaDaPeca, int linhaDaPeca){
 		this.nomeDaPeca=nomeDaPeca;
+		this.tipoDaPeca=tipoDaPeca;
 		this.manaDaPeca= 1;
 		this.donoOriginalDaPeca=donoOriginalDaPeca;
 		this.donoTemporarioDaPeca = donoTemporarioDaPeca;

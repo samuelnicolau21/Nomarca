@@ -20,6 +20,7 @@ public class AuxVerificaJogada {
 	public static Peca pecaAPartirDoLocal(Jogo jogo, MensagemJogada jogada) {
 		return jogo.tabuleiro[localPeloId(jogada.idOrigem).linha][localPeloId(jogada.idOrigem).coluna];
 	}
+		
 	public static boolean movimentoDentroDoAlcancePermitido(LinhaColuna origem, LinhaColuna destino, Jogo jogo) {
 		if(Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimento 
 		   && Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimento) {
@@ -62,9 +63,32 @@ public class AuxVerificaJogada {
 		}
 		return false;
 	}
+	
 	public static boolean casaDeDestinoVazia(Jogo jogo, MensagemJogada jogada) {
-		if(jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna]==null||
-		   !jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].nomeDaPeca.equals("bloco")) {
+		if(jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna]==null){
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean casaDeDestinoTemUmBloco(Jogo jogo, MensagemJogada jogada) {
+		if (jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].nomeDaPeca.equals("bloco")) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public static boolean casaDeDestinoTemPecaDoRival(Jogo jogo, MensagemJogada jogada) {
+		if(jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals(jogo.jogadorDoTurno)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean casaDeDestinoValida(Jogo jogo, MensagemJogada jogada) {
+		if(casaDeDestinoVazia(jogo, jogada)||casaDeDestinoTemPecaDoRival(jogo, jogada)) {
 			return true;
 		}
 		
@@ -86,7 +110,7 @@ public class AuxVerificaJogada {
 		   (jogadorDaVezEhODonoOriginalDaPeca(jogo,jogada)||
 		   ( jogadorDaVezEhODonoTemporarioDaPeca(jogo,jogada) && pecaAindaSobControleDoDonoTemporario(jogo,jogada) ) )&&
 		   pecaTemManaSuficienteParaSeMover(jogo, jogada)&&
-		   casaDeDestinoVazia(jogo, jogada)&&
+		   casaDeDestinoValida(jogo, jogada)&&
 		   movimentoOrtogonal(jogo, jogada)&&
 		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo)) {
 			return true;}

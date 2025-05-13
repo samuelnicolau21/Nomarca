@@ -38,33 +38,27 @@ public class Jogo {
 		this.pecasJogador2 = new Peca[5];
 		this.tabuleiro = new Peca[9][9];
 		
-		
-		
-		
+		//criando os Axionautas
 		for (int i=0;i<5;i++) {
-			this.pecasJogador1[i] = new Peca(listaDeNomes1[i], this.jogador1,this.jogador1,2+i,0);
-			this.pecasJogador2[i] = new Peca(listaDeNomes2[i], this.jogador2,this.jogador2,2+i,8);
+			this.pecasJogador1[i] = new Peca(listaDeNomes1[i],"Axionauta", this.jogador1,this.jogador1,2+i,0);
+			this.pecasJogador2[i] = new Peca(listaDeNomes2[i],"Axionauta", this.jogador2,this.jogador2,2+i,8);
 		}
 		
+		//criando e posicionando os blocos
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<3;j++) {
+				if(i+3==4 && j+3==4) {}
+				else {this.tabuleiro[3+j][i+3]=new Peca("bloco","bloco","ambos","ambos",i+3,i+3);}
+				
+			}
+		}
+			
+		//posicionando os axionautas
 		for (int i=0;i<5;i++) {
 			this.tabuleiro[this.pecasJogador1[i].linhaDaPeca][this.pecasJogador1[i].colunaDaPeca]=this.pecasJogador1[i];
-			this.tabuleiro[this.pecasJogador2[i].linhaDaPeca][this.pecasJogador2[i].colunaDaPeca]=this.pecasJogador2[i];			
-		}
-		
-		/*for (int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				if(this.tabuleiro[i][j]!=null){
-					System.out.println("nome:"+tabuleiro[i][j].nomeDaPeca+" dono temporario da peca:"
-							+ tabuleiro[i][j].donoTemporarioDaPeca + " linha:"
-							+ tabuleiro[i][j].linhaDaPeca + " coluna:"
-							+ tabuleiro[i][j].colunaDaPeca
-							+" quantidade de mana da peca:"+ tabuleiro[i][j].manaDaPeca);
-				}
-			}
+			this.tabuleiro[this.pecasJogador2[i].linhaDaPeca][this.pecasJogador2[i].colunaDaPeca]=this.pecasJogador2[i];
 			
 		}
-		System.out.println("jogador do turno: "+ this.jogadorDoTurno);
-		System.out.println("Quantida de mana para mover mago: "+ this.quantidadeDeManaParaMoverMago);
-		*/
+		
 	}
 }
