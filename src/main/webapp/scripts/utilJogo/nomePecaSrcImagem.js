@@ -10,14 +10,14 @@ function gerarPecas(cor1, cor2, cor_bloco) {
 		tempo2: { src: `./imagens/tempo_quente${cor2}.png`, linha: "8", coluna: "4" },
 		mente2: { src: `./imagens/mente_quente${cor2}.png`, linha: "8", coluna: "5" },
 		espaco2: { src: `./imagens/espaço_quente${cor2}.png`, linha: "8", coluna: "6" },
-		bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"3",coluna:"3"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"3",coluna:"4"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"3",coluna:"5"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"4",coluna:"3"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"4",coluna:"5"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"5",coluna:"3"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"5",coluna:"4"},
-	 	bloco:{src:`./imagens/${cor_bloco}.jpg`,linha:"5",coluna:"5"}
+		bloco:{src:`./imagens/${cor_bloco}.png`,linha:"3",coluna:"3"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"3",coluna:"4"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"3",coluna:"5"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"4",coluna:"3"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"4",coluna:"5"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"5",coluna:"3"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"5",coluna:"4"},
+	 	bloco:{src:`./imagens/${cor_bloco}.png`,linha:"5",coluna:"5"}
 	};
 }
 

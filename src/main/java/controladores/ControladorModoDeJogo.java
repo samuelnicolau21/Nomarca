@@ -9,6 +9,8 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import modelos.MensagemModoDeJogo;
 import modelos.Partidas;
+import modelos.Partida;
+import modelos.PartidaDTO;
 import servicos.ServicoDePareamentoDePartida;
 import modelos.SessaoModoStatus;
 
@@ -34,18 +36,23 @@ public class ControladorModoDeJogo {
         if(Sessoes.sessoes.containsKey(nomeDeUsuario)) {
     		Sessoes.sessoes.get(nomeDeUsuario).modo=modo;
     		ServicoDePareamentoDePartida servico = new ServicoDePareamentoDePartida();
-    		String resposta = servico.parear(nomeDeUsuario, modo);
+    		Partida resposta = servico.parear(nomeDeUsuario, modo);
     		
-    		if(resposta.equals("")){
+    		if(resposta==null){
+    			System.out.println("resposta null");
     			Session sessao1=Sessoes.sessoes.get(nomeDeUsuario).sessao;
     			try {sessao1.getBasicRemote().sendText("");} 
                 catch (IOException e) {e.printStackTrace();}
     		}
     		
-    		else if(!resposta.equals("")){
+    		else{
+    			System.out.println("resposta não null");
+    		    PartidaDTO dto = new PartidaDTO(resposta);
+    		    String json = gson.toJson(dto);
+
     			try {
-    			Partidas.partidas.get(resposta).sessao1.getBasicRemote().sendText(resposta);
-    			Partidas.partidas.get(resposta).sessao2.getBasicRemote().sendText(resposta);
+    			Partidas.partidas.get(resposta.id).sessao1.getBasicRemote().sendText(json);
+    			Partidas.partidas.get(resposta.id).sessao2.getBasicRemote().sendText(json);
             	}
                 catch (IOException e) {e.printStackTrace();}
     		}

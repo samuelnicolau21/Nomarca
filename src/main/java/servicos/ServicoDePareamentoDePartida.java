@@ -11,14 +11,14 @@ import modelos.Jogo;
 public class ServicoDePareamentoDePartida{
 	public ServicoDePareamentoDePartida(){}
 	
-	public String parear(String nomeDeUsuario,String modo){
+	public Partida parear(String nomeDeUsuario,String modo){
 		AtomicReference<String> id_da_partida_criada = new AtomicReference<>("");
 		
 		Sessoes.sessoes.forEach((chave, valor) -> {
 			if (!nomeDeUsuario.equals(chave)
-					&& valor.modo.equals(modo)
-					&& valor.status.equals("nao pareado")
-					&& !Sessoes.sessoes.get(nomeDeUsuario).status.equals("pareado")){
+				&& valor.modo.equals(modo)
+				&& valor.status.equals("nao pareado")
+				&& !Sessoes.sessoes.get(nomeDeUsuario).status.equals("pareado")){
 				
 				SessaoModoStatus sms = Sessoes.sessoes.get(nomeDeUsuario);
 				sms.status="pareado";
@@ -32,7 +32,7 @@ public class ServicoDePareamentoDePartida{
 		});
 		
 		String id_partida = id_da_partida_criada.get();
-		return id_partida;
+		return Partidas.partidas.get(id_partida);
 
 	}
 }

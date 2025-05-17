@@ -3,7 +3,7 @@ import {moverPeca} from './moverPeca.js';
 
 sessionStorage.setItem("cor1",2);
 sessionStorage.setItem("cor2",2);
-sessionStorage.setItem("cor_bloco",'madeira_escura')
+sessionStorage.setItem("cor_bloco",'cubo_cinza_simples')
 
 const tabuleiro = document.querySelector('.tabuleiro');
 
@@ -12,6 +12,12 @@ function criarTabuleiro() {
 		for (let j = 0; j < 9; j++){
 			const celula = document.createElement('div');
 			celula.classList.add('celula');
+			// Aplica cor estilo xadrez
+			/*if ((i + j) % 2 === 0) {
+			    celula.classList.add('clara_textura');
+			} else {
+			    celula.classList.add('escura_textura');
+			}*/
 			celula.id = `celula-${i}${j}`;
 			celula.addEventListener('dragover', (e) => e.preventDefault());
 			celula.addEventListener('drop', (e) => { e.preventDefault();
@@ -22,7 +28,7 @@ function criarTabuleiro() {
 			tabuleiro.appendChild(celula);
 		}
     }
-	adicionarPecasNasPosicoesIniciais(2,2,'madeira_escura');
+	adicionarPecasNasPosicoesIniciais(2,2,'cubo_cinza_simples');
 }
 
 export {criarTabuleiro}

@@ -8,10 +8,16 @@ let socket = new WebSocket(`ws://localhost:8080/Arcana_/controladorDeJogo/${nome
 socket.onmessage = function(event){
 	if(event.data=="movimento inválido"){
 		console.log("movimento inválido")
+		const som_movimento_ilegal= new Audio('./sons/illegal.mp3');
+		som_movimento_ilegal.volume = 1;
+		som_movimento_ilegal.play();
 	}
 	else{
 		let jogo = JSON.parse(event.data);
 		atualizarJogo(jogo)
+		const som_movimento= new Audio('./sons/move-check.mp3');
+		som_movimento.volume = 1;
+		som_movimento.play();
 	}	  
 }
 

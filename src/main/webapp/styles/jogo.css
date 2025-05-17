@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #c0c0c0;
+    background-color: rgb(255,255,255,255);
 }
 
 .tabuleiro {
@@ -22,7 +22,7 @@ body {
     border: 5px solid #333;
     width: 730px;
     height: 730px;
-    background-image: url('../imagens/TRAMA.jpg');
+    background-image: url('../imagens/madeira_clara.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,7 +31,7 @@ body {
 .celula {
     width: 80px;
     height: 80px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid rgb(64, 0, 64);
 }
 
 /* Container para a peça (imagem + contador de mana) */
@@ -40,6 +40,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+    
 }
 
 /* Imagem da peça */
@@ -48,7 +49,12 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50px;
-    border: 5px solid #333;
+    border: 3px solid #333;
+    transition: transform 0.3s ease;
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.5); /* sombra adicionada */
+}
+.peca:hover {
+    transform: scale(1.1);
 }
 
 /* Contador de mana no canto superior direito */
@@ -74,6 +80,68 @@ body {
 .imgBloco {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 10px;
-    border: 5px solid #333;
+    border-radius: 80px;
+    border: 3px solid #333;
+    background-image: url('../imagens/cubo_simples_cinza_simples.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow:6px 6px 5px rgba(0, 0, 0, 0.5);
+    
+    
+}
+
+.tabuleiro-jogador1 {
+    transform: rotate(0deg);
+}
+
+.tabuleiro-jogador2 {
+    transform: rotate(180deg);
+}
+
+.tabuleiro-jogador2 .container-peca {
+    transform: rotate(180deg);
+}
+.tabuleiro-jogador2 .container-bloco{
+	transform: rotate(180deg);
+}
+
+.celula.clara_textura {
+    background-image: url('../imagens/marmore_branco.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.celula.escura_textura {
+    background-image: url('../imagens/marmore_marrom.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.celula.clara {
+	background-color:  #d3a625; 
+	/*#ae0001 grifinória vermelho*/
+    /*#740001 grifinória vermelho escuro*/
+    /*#eeba30 grifinória amarelo */
+    /*#d3a625 grifinória ouro*/
+    /*#1a472a Sonserina verde*/
+    /*#2a623d Sonserina verde escuro*/
+    /*#5d5d5d Sonserina prata escuro */
+    /*#aaaaaa Sonserina prata claro*/
+
+    
+}
+
+.celula.escura {
+    background-color: #aaaaaa;
+	/*#ae0001 grifinória vermelho*/
+    /*#740001 grifinória vermelho escuro*/
+    /*#eeba30 grifinória amarelo */
+    /*#d3a625 grifinória ouro*/
+    /*#1a472a Sonserina verde*/
+    /*#2a623d Sonserina verde escuro*/
+    /*#5d5d5d Sonserina prata escuro */
+    /*#aaaaaa Sonserina prata claro*/
 }

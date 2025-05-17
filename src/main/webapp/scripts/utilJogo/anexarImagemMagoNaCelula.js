@@ -5,6 +5,7 @@ function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
     if (celula) {
         const container = document.createElement('div');
         container.classList.add('container-peca');
+		
 
         // Cria a imagem da peça
         const img = document.createElement('img');
@@ -12,9 +13,6 @@ function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
         img.alt = 'Imagem na célula';
         img.draggable = true;
         img.classList.add('peca');
-        img.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('idOrigem', idCelula);
-        });
 
         // Cria o contador de mana
         const manaDiv = document.createElement('div');
@@ -25,6 +23,27 @@ function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
         container.appendChild(img);
         container.appendChild(manaDiv);
         celula.appendChild(container);
+
+        // Adiciona o evento de drag após a montagem do container
+        img.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('idOrigem', idCelula);
+			e.dataTransfer.effectAllowed = 'move';
+            // Clona o container visual completo (imagem + mana)
+            const visualClone = container.cloneNode(true);
+            visualClone.style.position = 'absolute';
+            visualClone.style.top = '-9999px';
+            visualClone.style.left = '-9999px';
+            visualClone.style.width = container.offsetWidth + 'px';
+            visualClone.style.height = container.offsetHeight + 'px';
+            visualClone.style.opacity = '1'; // força visual sólido
+            visualClone.style.zIndex = '1000';
+
+            document.body.appendChild(visualClone);
+            e.dataTransfer.setDragImage(visualClone, container.offsetWidth / 2, container.offsetHeight / 2);
+
+            // Remove clone logo após o uso
+            setTimeout(() => document.body.removeChild(visualClone), 0);
+        });
     } else {
         console.log(`Célula ${idCelula} não encontrada`);
     }
