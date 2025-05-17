@@ -13,7 +13,7 @@ public class ServicoDeProcessamentoDeJogada {
 		
 
 		if(AuxVerificaJogada.verificaSeMovimentoMagoEhValido(jogo, jogada)){
-			
+			System.out.println("passei da verificação");
 			AuxAtualizacaoJogo.reduzManaPecaJogada(jogada,jogo);
 			AuxAtualizacaoJogo.adicionaManaAsOutrasPecas(jogada,jogo);
 			AuxAtualizacaoJogo.atualizaPosicaoDaPecaJogada(jogada,jogo);

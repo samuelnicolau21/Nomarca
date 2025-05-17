@@ -39,13 +39,15 @@ public class AuxVerificaJogada {
 		return false;
 	}
 	public static boolean jogadorDaVezEhODonoOriginalDaPeca(Jogo jogo, MensagemJogada jogada) {
-		if(pecaAPartirDoLocal(jogo, jogada).donoOriginalDaPeca.equals(jogada.nomeDeUsuario)) {
+		if(pecaAPartirDoLocal(jogo, jogada).donoOriginalDaPeca.equals(jogada.nomeDeUsuario)||
+		   pecaAPartirDoLocal(jogo, jogada).donoOriginalDaPeca.equals("ambos")) {
 			return true;
 		}
 		return false;
 	}
 	public static boolean jogadorDaVezEhODonoTemporarioDaPeca(Jogo jogo, MensagemJogada jogada) {
-		if(pecaAPartirDoLocal(jogo, jogada).donoTemporarioDaPeca.equals(jogada.nomeDeUsuario)) {
+		if(pecaAPartirDoLocal(jogo, jogada).donoTemporarioDaPeca.equals(jogada.nomeDeUsuario)||
+		   pecaAPartirDoLocal(jogo, jogada).donoTemporarioDaPeca.equals("ambos")) {
 			return true;
 		}
 		
@@ -58,7 +60,8 @@ public class AuxVerificaJogada {
 		return false;
 	}
 	public static boolean pecaTemManaSuficienteParaSeMover(Jogo jogo, MensagemJogada jogada) {
-		if(pecaAPartirDoLocal(jogo, jogada).manaDaPeca>=jogo.quantidadeDeManaParaMoverMago) {
+		if(pecaAPartirDoLocal(jogo, jogada).manaDaPeca>=jogo.quantidadeDeManaParaMoverMago ||
+		   pecaAPartirDoLocal(jogo, jogada).nomeDaPeca.equals("bloco")) {
 			return true;
 		}
 		return false;
@@ -80,7 +83,9 @@ public class AuxVerificaJogada {
 	}
 	
 	public static boolean casaDeDestinoTemPecaDoRival(Jogo jogo, MensagemJogada jogada) {
-		if(jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals(jogo.jogadorDoTurno)) {
+		if(jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals(jogo.jogadorDoTurno)
+			|| jogo.tabuleiro[localPeloId(jogada.idOrigem).linha][localPeloId(jogada.idOrigem).coluna].donoOriginalDaPeca.equals("ambos")
+			|| jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals("ambos")) {
 			return false;
 		}
 		
@@ -101,8 +106,40 @@ public class AuxVerificaJogada {
 		}
 		return false;
 	}
+	
+	public static boolean movimentoDeBlocoValido(Jogo jogo, MensagemJogada jogada) {
+		if(jogada.nomeDeUsuario.equals(jogo.jogador1) 
+		   && jogo.permitidoMoverBloco
+		   && pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("bloco")){
+			for (int i=0;i<jogo.pecasJogador1.length;i++){
+				if(jogo.pecasJogador1[i].nomeDaPeca.equals("materia1")
+				   && jogo.pecasJogador1[i].manaDaPeca>=jogo.quantidadeDeManaParaMoverMago) {
+				   jogo.pecasJogador1[i].manaDaPeca = jogo.pecasJogador1[i].manaDaPeca - jogo.quantidadeDeManaParaMoverMago - jogo.quantidadeDeManaGanhoNoFimDoTurno;
+				   System.out.println("mana da materia 1:"+ jogo.pecasJogador1[i].manaDaPeca);
+				   return true;
+				}
+			}
+			return false;
+		}
+		else if (jogo.permitidoMoverBloco 
+				&& pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("bloco")) {
+			for (int i=0;i<jogo.pecasJogador2.length;i++){
+				if(jogo.pecasJogador2[i].nomeDaPeca.equals("materia2")
+				   && jogo.pecasJogador2[i].manaDaPeca>=jogo.quantidadeDeManaParaMoverMago) {
+				   jogo.pecasJogador2[i].manaDaPeca= jogo.pecasJogador2[i].manaDaPeca - jogo.quantidadeDeManaParaMoverMago - jogo.quantidadeDeManaGanhoNoFimDoTurno;
+				   System.out.println("mana da materia 2:"+ jogo.pecasJogador2[i].manaDaPeca);
+				   return true;
+				}
+			}
+			return false;
+		}
+		
+		
+		return true;
+	}
+	
 	public static boolean verificaSeMovimentoMagoEhValido(Jogo jogo, MensagemJogada jogada) {
-		if(jogada.acao.equals("movimentoMago")&&
+		if(jogada.acao.equals("movimento")&&
 		   jogo.statusDoJogo.equals("iniciado")&&
 		   jogada.nomeDeUsuario.equals(jogo.jogadorDoTurno)&&
 		   jogo.acoesDisponiveisJogadorDoTurno>0 &&
@@ -112,7 +149,8 @@ public class AuxVerificaJogada {
 		   pecaTemManaSuficienteParaSeMover(jogo, jogada)&&
 		   casaDeDestinoValida(jogo, jogada)&&
 		   movimentoOrtogonal(jogo, jogada)&&
-		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo)) {
+		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo)&&
+		   movimentoDeBlocoValido(jogo, jogada)) {
 			return true;}
 		return false;
 		

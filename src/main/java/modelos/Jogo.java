@@ -20,6 +20,7 @@ public class Jogo {
 	public int quantidadeDeManaParaMoverMago;
 	public int quantidadeDeCasasDoMovimento;
 	public int quantidadeDeManaGanhoNoFimDoTurno;
+	public boolean permitidoMoverBloco;
 	
 	public Jogo(String jogador1, String jogador2){
 		this.jogador1 = jogador1;
@@ -34,6 +35,7 @@ public class Jogo {
 		this.contadorDeTurnos=1;
 		this.quantidadeDePontosJogador1= 0;
 		this.quantidadeDePontosJogador2= 0;
+		this.permitidoMoverBloco = true;
 		this.pecasJogador1 = new Peca[5]; 
 		this.pecasJogador2 = new Peca[5];
 		this.tabuleiro = new Peca[9][9];

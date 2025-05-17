@@ -22,12 +22,13 @@ socket.onmessage = function(event){
 }
 
 function moverPeca(celulaOrigem,celula){
-	if (celulaOrigem && celulaOrigem.querySelector('.container-peca')) {
+	if (celulaOrigem && ( celulaOrigem.querySelector('.container-peca') 
+		||celulaOrigem.querySelector('.container-bloco') ) ) {
 		
 		let mensagem = {
 			"nomeDeUsuario":nomeDeUsuario,
 			"idPartida":idPartida,
-			"acao":"movimentoMago",
+			"acao":"movimento",
 			"idOrigem":celulaOrigem.id,
 			"idDestino":celula.id,"magia":{}
 		};

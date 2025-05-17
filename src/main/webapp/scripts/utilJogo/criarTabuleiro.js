@@ -1,8 +1,8 @@
 import {adicionarPecasNasPosicoesIniciais} from './adicionarPecasNasPosicoesIniciais.js';
 import {moverPeca} from './moverPeca.js';
 
-sessionStorage.setItem("cor1",2);
-sessionStorage.setItem("cor2",2);
+sessionStorage.setItem("cor1",3);
+sessionStorage.setItem("cor2",3);
 sessionStorage.setItem("cor_bloco",'cubo_cinza_simples')
 
 const tabuleiro = document.querySelector('.tabuleiro');
@@ -28,7 +28,7 @@ function criarTabuleiro() {
 			tabuleiro.appendChild(celula);
 		}
     }
-	adicionarPecasNasPosicoesIniciais(2,2,'cubo_cinza_simples');
+	adicionarPecasNasPosicoesIniciais(3,3,'cubo_cinza_simples');
 }
 
 export {criarTabuleiro}
