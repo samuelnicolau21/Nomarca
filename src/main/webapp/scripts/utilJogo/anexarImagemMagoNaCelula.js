@@ -1,3 +1,23 @@
+import {criarMenuDeContexto, esconderMenu} from './criarMenuDeContexto.js';
+import {criarCaixaDeRegras} from './criarCaixaDeRegras.js';
+import {tornarArrastavel} from './tornarArrastavel.js';
+
+let menuContexto=criarMenuDeContexto();
+let caixaRegras =  criarCaixaDeRegras();
+
+
+window.acaoEditarRegra = () => {
+    esconderMenu();
+	// Define a posição apenas se ainda não estiver posicionada
+	  if (!caixaRegras.style.top) {
+	      caixaRegras.style.top = '100px';
+	      caixaRegras.style.left = '100px';
+	  }
+	  caixaRegras.style.display = 'block';
+};
+
+tornarArrastavel(caixaRegras, caixaRegras.querySelector('.barra-drag'));
+
 function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
     const celula = document.getElementById(idCelula);
     celula.innerHTML = '';
@@ -44,6 +64,16 @@ function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
             // Remove clone logo após o uso
             setTimeout(() => document.body.removeChild(visualClone), 0);
         });
+		
+		// Adcionar o evento de contextmenu
+		img.addEventListener('contextmenu', function (e) {
+		    e.preventDefault();
+		    menuContexto.style.top = `${e.pageY}px`;
+		    menuContexto.style.left = `${e.pageX}px`;
+		    menuContexto.style.display = 'block';
+		    menuContexto.dataset.celulaId = idCelula;
+		});
+		
     } else {
         console.log(`Célula ${idCelula} não encontrada`);
     }
