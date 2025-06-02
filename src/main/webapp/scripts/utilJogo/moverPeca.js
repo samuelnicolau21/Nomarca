@@ -1,29 +1,18 @@
 import { enviarMensagem } from "../util/enviarMensagem.js";
-import { atualizarJogo } from "./atualizarJogo.js";
+import {avisaMensagemNaoEnviada} from './avisaMensagemNaoEnviada.js';
+import {iniciarSocketDeJogada, getSocketJogada} from './socketJogada.js'; 
+
 
 const idPartida = sessionStorage.getItem("idPartida");
 const nomeDeUsuario = sessionStorage.getItem("nomeDeUsuario");
-let socket = new WebSocket(`ws://localhost:8080/Arcana_/controladorDeJogo/${nomeDeUsuario}/${idPartida}`)
-
-socket.onmessage = function(event){
-	if(event.data=="movimento inválido"){
-		console.log("movimento inválido")
-		const som_movimento_ilegal= new Audio('./sons/illegal.mp3');
-		som_movimento_ilegal.volume = 1;
-		som_movimento_ilegal.play();
-	}
-	else{
-		let jogo = JSON.parse(event.data);
-		atualizarJogo(jogo)
-		const som_movimento= new Audio('./sons/move-check.mp3');
-		som_movimento.volume = 1;
-		som_movimento.play();
-	}	  
-}
 
 function moverPeca(celulaOrigem,celula){
 	if (celulaOrigem && ( celulaOrigem.querySelector('.container-peca') 
 		||celulaOrigem.querySelector('.container-bloco') ) ) {
+		
+		// Certifica que o socket está iniciado
+		iniciarSocketDeJogada(nomeDeUsuario, idPartida);
+		const socket = getSocketJogada();
 		
 		let mensagem = {
 			"nomeDeUsuario":nomeDeUsuario,
@@ -34,7 +23,12 @@ function moverPeca(celulaOrigem,celula){
 		};
 		
 		if(socket.readyState==WebSocket.OPEN){
+			console.log("enviando mensagem de movimento");
 			enviarMensagem(mensagem,socket)
+		}
+		else{
+			console.log("erro ao enviar mensagem de movimento")
+			avisaMensagemNaoEnviada();
 		}
 			 	
 	}

@@ -13,26 +13,31 @@ public class ServicoDeProcessamentoDeJogada {
 		
 
 		if(AuxVerificaJogada.verificaSeMovimentoMagoEhValido(jogo, jogada)){
-			System.out.println("passei da verificação");
 			AuxAtualizacaoJogo.reduzManaPecaJogada(jogada,jogo);
 			AuxAtualizacaoJogo.adicionaManaAsOutrasPecas(jogada,jogo);
 			AuxAtualizacaoJogo.atualizaPosicaoDaPecaJogada(jogada,jogo);
 			AuxAtualizacaoJogo.reduzAcoesJogadorDoTurno(jogada,jogo);
 				
-			System.out.println("movimento validado pelo if de movimentoMago");
-			jogo.mensagem="";
+			System.out.println("movimento válido");
+			jogo.mensagem="movimento válido";
 			return jogo;
 			
 		}
 		else if(AuxVerificaJogada.verificaSeMagiaLancadaEhValida(jogo, jogada)) {
-
+			
+			
 		}
 		else if(AuxVerificaJogada.verificaSeEdicaoEhValida(jogo, jogada)){
+			AuxAtualizacaoJogo.adicionaManaAsOutrasPecas(jogada,jogo);
+			AuxAtualizacaoJogo.reduzAcoesJogadorDoTurno(jogada,jogo);
+			System.out.println("edição válida");
+			jogo.mensagem="edição válida";
+			return jogo;
 			
 		}
 		
-		System.out.println("movimento invalidado pelo if de movimentoMago");
-		jogo.mensagem="movimento inválido";
+		System.out.println("edição inválida");
+		jogo.mensagem="edição inválida";
 		return jogo;
 	}
 	

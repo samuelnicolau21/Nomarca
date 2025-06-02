@@ -42,7 +42,11 @@ public class ControladorDeJogo {
     				 jogo.mensagem="";}
     			catch(IOException e){e.printStackTrace();}
     		}
-    		
+    		else if (jogo.mensagem.equals("edição inválida")) {
+    			try {Sessoes.sessoes.get(nomeDeUsuario).sessao.getBasicRemote().sendText("edição inválida");
+				 jogo.mensagem="";}
+			catch(IOException e){e.printStackTrace();}
+    		}
     		else{
     			try {
     			Sessoes.sessoes.get(Partidas.partidas.get(mensagemJogada.idPartida).usuario1).sessao.getBasicRemote().sendText(resposta);

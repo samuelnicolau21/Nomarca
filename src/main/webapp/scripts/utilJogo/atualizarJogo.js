@@ -2,6 +2,7 @@ import {anexarImagemMagoNaCelula} from './anexarImagemMagoNaCelula.js';
 import { anexarImagemBlocoNaCelula } from './anexarImagemBlocoNaCelula.js';
 import {removerImagemAnexadaDaCelula} from './removerImagemAnexadaDaCelula.js';
 import { gerarPecas } from "./nomePecaSrcImagem.js";
+import {atualizarTextoDaRegra} from './atualizarTextoDaRegra.js';
 
 
 
@@ -18,7 +19,24 @@ function atualizarJogo(jogo){
 			removerImagemAnexadaDaCelula(`celula-${i}${j}`);
 		}
 	}
-
+	//1.2 atualiza o valor das regras
+	atualizarTextoDaRegra('acao1', jogo.acoesDoJogador1PorTurno);
+	atualizarTextoDaRegra('acao2', jogo.acoesDoJogador2PorTurno);
+	atualizarTextoDaRegra('mana1', jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1);
+	atualizarTextoDaRegra('mana1b', jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1);
+	atualizarTextoDaRegra('mana2', jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2);
+	atualizarTextoDaRegra('mana2b', jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2);
+	atualizarTextoDaRegra('locomocao1', jogo.quantidadeDeCasasDoMovimentoJogador1);
+	atualizarTextoDaRegra('locomocao2', jogo.quantidadeDeCasasDoMovimentoJogador2);
+	atualizarTextoDaRegra('locomocaoBloco1', jogo.quantidadeDeCasasDoMovimentoBlocoJogador1);
+	atualizarTextoDaRegra('locomocaoBloco2', jogo.quantidadeDeCasasDoMovimentoBlocoJogador2);
+	atualizarTextoDaRegra('controle1', jogo.quantidadeDeTurnosDeControleInimigoJogador1);
+	atualizarTextoDaRegra('controle1b', jogo.quantidadeDeTurnosDeControleInimigoJogador1);
+	atualizarTextoDaRegra('controle2', jogo.quantidadeDeTurnosDeControleInimigoJogador2);
+	atualizarTextoDaRegra('controle2b', jogo.quantidadeDeTurnosDeControleInimigoJogador2);
+	atualizarTextoDaRegra('alcance1', jogo.alcanceDaMenteJogador1);
+	atualizarTextoDaRegra('alcance2', jogo.alcanceDaMenteJogador2);
+	
 	// 2. Adicionar peças com base no novo estado
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
@@ -40,6 +58,8 @@ function atualizarJogo(jogo){
 			}
 		}
 	}
+	
+
 }
 
 export { atualizarJogo }

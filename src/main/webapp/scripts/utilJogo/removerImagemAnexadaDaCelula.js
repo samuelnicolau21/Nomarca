@@ -20,8 +20,6 @@ function removerImagemAnexadaDaCelula(idCelula) {
         return;
     }
 
-
-    console.warn(`Nada para remover na célula ${idCelula}`);
 }
 
 export { removerImagemAnexadaDaCelula };

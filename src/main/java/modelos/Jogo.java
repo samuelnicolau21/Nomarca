@@ -19,7 +19,17 @@ public class Jogo {
 	public String statusDoJogo = "iniciado";
 	public int quantidadeDeManaParaMoverMago;
 	public int quantidadeDeCasasDoMovimento;
+	public int quantidadeDeCasasDoMovimentoJogador1;
+	public int quantidadeDeCasasDoMovimentoJogador2;
+	public int quantidadeDeCasasDoMovimentoBlocoJogador1;
+	public int quantidadeDeCasasDoMovimentoBlocoJogador2;
 	public int quantidadeDeManaGanhoNoFimDoTurno;
+	public int quantidadeDeManaGanhoNoFimDoTurnoJogador1;
+	public int quantidadeDeManaGanhoNoFimDoTurnoJogador2;
+	public int quantidadeDeTurnosDeControleInimigoJogador1;
+	public int quantidadeDeTurnosDeControleInimigoJogador2;
+	public int alcanceDaMenteJogador1;
+	public int alcanceDaMenteJogador2;
 	public boolean permitidoMoverBloco;
 	
 	public Jogo(String jogador1, String jogador2){
@@ -29,7 +39,17 @@ public class Jogo {
 		this.acoesDisponiveisJogadorDoTurno=1;
 		this.quantidadeDeManaParaMoverMago=1;
 		this.quantidadeDeCasasDoMovimento=1;
+		this.quantidadeDeCasasDoMovimentoJogador1=1;
+		this.quantidadeDeCasasDoMovimentoJogador2=1;
+		this.quantidadeDeCasasDoMovimentoBlocoJogador1=0;
+		this.quantidadeDeCasasDoMovimentoBlocoJogador2=0;
 		this.quantidadeDeManaGanhoNoFimDoTurno=1;
+		this.quantidadeDeManaGanhoNoFimDoTurnoJogador1=1;
+		this.quantidadeDeManaGanhoNoFimDoTurnoJogador2=1;
+		this.quantidadeDeTurnosDeControleInimigoJogador1=0;
+		this.quantidadeDeTurnosDeControleInimigoJogador2=0;
+		this.alcanceDaMenteJogador1=1;
+		this.alcanceDaMenteJogador2=2;
 		this.acoesDoJogador1PorTurno=1;
 		this.acoesDoJogador2PorTurno=1;
 		this.contadorDeTurnos=1;

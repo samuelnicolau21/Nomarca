@@ -1,11 +1,11 @@
-let menuContexto = null; // variável no escopo do módulo
+import {tornarArrastavel} from './tornarArrastavel.js';
+import {criarCaixaDeRegras} from './criarCaixaDeRegras.js';
+import {esconderMenu} from './esconderMenu.js';
 
-function esconderMenu() {
-	if(menuContexto){
-		menuContexto.style.display = 'none';
-	}
-    
-}
+let menuContexto = null; // variável no escopo do módulo
+let caixaRegras = criarCaixaDeRegras();
+tornarArrastavel(caixaRegras, caixaRegras.querySelector('.barra-drag'));
+
 function criarMenuDeContexto(menuContexto){
 	// Cria o menu de contexto e adiciona ao body
 	menuContexto = document.createElement('div');
@@ -29,12 +29,19 @@ function criarMenuDeContexto(menuContexto){
 		});
 		
 	// Funções do menu contexto
-	window.acaoPermutar = () => { alert('Permutar selecionado'); esconderMenu(); };
-	window.acaoControlar = () => { alert('Controlar selecionado'); esconderMenu(); };
-	
+	window.acaoPermutar = () => { alert('Permutar ainda vai ser implementado'); esconderMenu(); };
+	window.acaoControlar = () => { alert('Controlar ainda vai ser implementado'); esconderMenu(); };
+	window.acaoEditarRegra = () => {
+	    esconderMenu(menuContexto);
+		// Define a posição apenas se ainda não estiver posicionada
+		  if (!caixaRegras.style.top) {
+		      caixaRegras.style.top = '100px';
+		      caixaRegras.style.left = '100px';
+		  }
+		  caixaRegras.style.display = 'block';
+	};
 	return menuContexto;
 	
 }
 
 export {criarMenuDeContexto}
-export {esconderMenu}	

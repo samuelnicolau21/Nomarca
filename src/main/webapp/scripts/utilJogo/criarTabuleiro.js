@@ -1,11 +1,17 @@
 import {adicionarPecasNasPosicoesIniciais} from './adicionarPecasNasPosicoesIniciais.js';
 import {moverPeca} from './moverPeca.js';
+import {iniciarSocketDeJogada} from './socketJogada.js';
+
+const idPartida = sessionStorage.getItem("idPartida");
+const nomeDeUsuario = sessionStorage.getItem("nomeDeUsuario");
 
 sessionStorage.setItem("cor1",2);
 sessionStorage.setItem("cor2",1);
 sessionStorage.setItem("cor_bloco",'cubo_cinza_simples')
 
 const tabuleiro = document.querySelector('.tabuleiro');
+
+iniciarSocketDeJogada(nomeDeUsuario, idPartida);
 
 function criarTabuleiro() {
     for (let i = 0; i < 9; i++) {

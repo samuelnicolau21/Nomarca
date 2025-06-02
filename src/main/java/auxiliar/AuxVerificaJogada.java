@@ -43,6 +43,7 @@ public class AuxVerificaJogada {
 		   pecaAPartirDoLocal(jogo, jogada).donoOriginalDaPeca.equals("ambos")) {
 			return true;
 		}
+		System.out.println("jogador da vez não eh o dono original da peça");
 		return false;
 	}
 	public static boolean jogadorDaVezEhODonoTemporarioDaPeca(Jogo jogo, MensagemJogada jogada) {
@@ -50,13 +51,14 @@ public class AuxVerificaJogada {
 		   pecaAPartirDoLocal(jogo, jogada).donoTemporarioDaPeca.equals("ambos")) {
 			return true;
 		}
-		
+		System.out.println("jogador da vez não eh o dono temporario da peça");
 		return false;
 	}
 	public static boolean pecaAindaSobControleDoDonoTemporario(Jogo jogo, MensagemJogada jogada) {
 		if(pecaAPartirDoLocal(jogo, jogada).numeroDeTurnosDePosseTemporaria>0){
 			return true;
 		}
+		System.out.println("peca nao está mais sob o controle do dono temporario");
 		return false;
 	}
 	public static boolean pecaTemManaSuficienteParaSeMover(Jogo jogo, MensagemJogada jogada) {
@@ -138,6 +140,98 @@ public class AuxVerificaJogada {
 		return true;
 	}
 	
+	private static boolean seTemManaParaAlterarRegraFazAlteracao(Jogo jogo, MensagemJogada jogada) {
+		if(jogada.magia.regra.equals("acao1") &&
+		   pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoAcao1(jogo, jogada) &&
+		   pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("tempo1")) {
+		   pecaAPartirDoLocal(jogo,jogada).manaDaPeca-= custoAcao1(jogo, jogada);
+		   jogo.acoesDoJogador1PorTurno=jogada.magia.novoValor;
+		   return true;
+		}
+		else if(jogada.magia.regra.equals("acao2") &&
+				   pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoAcao2(jogo, jogada) &&
+				   pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("tempo2")) {
+				   pecaAPartirDoLocal(jogo,jogada).manaDaPeca-= custoAcao2(jogo, jogada);
+				   jogo.acoesDoJogador2PorTurno=jogada.magia.novoValor;
+				   return true;
+				}
+		else if(jogada.magia.regra.equals("mana1") && 
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoMana1(jogo, jogada)  &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("energia1")) {
+			pecaAPartirDoLocal(jogo, jogada).manaDaPeca-=custoMana1(jogo, jogada);
+			jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("mana2") && 
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoMana2(jogo, jogada)  &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("energia2")) {
+			pecaAPartirDoLocal(jogo, jogada).manaDaPeca-=custoMana2(jogo, jogada);
+			jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("locomocao1") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoLocomocao1(jogo, jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("espaco1")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca-=custoLocomocao1(jogo, jogada);
+			jogo.quantidadeDeCasasDoMovimentoJogador1=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("locomocao2") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoLocomocao2(jogo, jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("espaco2")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca-=custoLocomocao2(jogo, jogada);
+			jogo.quantidadeDeCasasDoMovimentoJogador2=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("locomocaoBloco1") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoLocomocaoBloco1(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("materia1")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca-=custoLocomocaoBloco1(jogo,jogada);
+			System.out.println("novoValor:"+jogada.magia.novoValor);
+			jogo.quantidadeDeCasasDoMovimentoBlocoJogador1=jogada.magia.novoValor;
+			System.out.println("jogador 1quantidade de casas que o bloco pode ser movido pós "
+					+ "alteração:"+jogo.quantidadeDeCasasDoMovimentoBlocoJogador1);
+			return true;
+		}
+		else if(jogada.magia.regra.equals("locomocaoBloco2") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoLocomocaoBloco2(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("materia2")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca-=custoLocomocaoBloco2(jogo,jogada);
+			jogo.quantidadeDeCasasDoMovimentoBlocoJogador2=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("controle1") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoControle1(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("mente1")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca -= custoControle1(jogo,jogada);
+			jogo.quantidadeDeTurnosDeControleInimigoJogador1=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("controle2") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoControle2(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("mente2")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca -= custoControle2(jogo,jogada);
+			jogo.quantidadeDeTurnosDeControleInimigoJogador2=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("alcance1") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoAlcance1(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("mente1")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca -= custoAlcance1(jogo,jogada);
+			jogo.alcanceDaMenteJogador1=jogada.magia.novoValor;
+			return true;
+		}
+		else if(jogada.magia.regra.equals("alcance2") &&
+				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoAlcance2(jogo,jogada) &&
+				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("mente2")) {
+			pecaAPartirDoLocal(jogo,jogada).manaDaPeca -= custoAlcance2(jogo,jogada);
+			jogo.alcanceDaMenteJogador2=jogada.magia.novoValor;
+			return true;
+		}
+		System.out.println("peça não tinha mana suficiente para efetuar a edição");
+		return false;
+	}
+	
 	public static boolean verificaSeMovimentoMagoEhValido(Jogo jogo, MensagemJogada jogada) {
 		if(jogada.acao.equals("movimento")&&
 		   jogo.statusDoJogo.equals("iniciado")&&
@@ -152,21 +246,73 @@ public class AuxVerificaJogada {
 		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo)&&
 		   movimentoDeBlocoValido(jogo, jogada)) {
 			return true;}
+		jogo.mensagem="movimento inválido";
 		return false;
 		
 	}
 
 	public static boolean verificaSeMagiaLancadaEhValida(Jogo jogo, MensagemJogada jogada) {
-		if (jogada.acao.equals("controlar")) {}
+		if (jogada.acao.equals("controlar")){}
 		else if(jogada.acao.equals("permutar")){}
 		else if(jogada.acao.equals("copiar")){}
+		jogo.mensagem="movimento inválido";
 		return false;
 	}
 
 	public static boolean verificaSeEdicaoEhValida(Jogo jogo, MensagemJogada jogada) {
-		// TODO Auto-generated method stub
+		System.out.println("verificando se a edicao eh valida");
+		if ( jogada.acao.equals("alteracao_regra") &&
+			(jogadorDaVezEhODonoOriginalDaPeca(jogo,jogada)||
+			( jogadorDaVezEhODonoTemporarioDaPeca(jogo,jogada) &&
+			  pecaAindaSobControleDoDonoTemporario(jogo,jogada) ) )
+			) {
+			
+			return seTemManaParaAlterarRegraFazAlteracao(jogo,jogada);
+		}
+		jogo.mensagem="movimento inválido";
 		return false;
 	}
+	
+	
+	public static int custoAcao1(Jogo jogo, MensagemJogada jogada){
+		return 5*Math.abs(jogo.acoesDoJogador1PorTurno-jogada.magia.novoValor);
+	}
+	public static int custoMana1(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1-jogada.magia.novoValor);
+	}
+	public static int custoLocomocao1(Jogo jogo, MensagemJogada jogada) {
+		return 2*Math.abs(jogo.quantidadeDeCasasDoMovimentoJogador1-jogada.magia.novoValor);
+	}
+	public static int custoLocomocaoBloco1(Jogo jogo, MensagemJogada jogada) {
+		return 1*Math.abs(jogo.quantidadeDeCasasDoMovimentoBlocoJogador1-jogada.magia.novoValor);
+	}
+	public static int custoControle1(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador1-jogada.magia.novoValor);
+	}
+	public static int custoAlcance1(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.alcanceDaMenteJogador1-jogada.magia.novoValor);
+	}
+	public static int custoAcao2(Jogo jogo, MensagemJogada jogada){
+		return 5*Math.abs(jogo.acoesDoJogador2PorTurno-jogada.magia.novoValor);
+	}
+	public static int custoMana2(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2-jogada.magia.novoValor);
+	}
+	public static int custoLocomocao2(Jogo jogo, MensagemJogada jogada) {
+		return 2*Math.abs(jogo.quantidadeDeCasasDoMovimentoJogador2-jogada.magia.novoValor);
+	}
+	public static int custoLocomocaoBloco2(Jogo jogo, MensagemJogada jogada) {
+		return 1*Math.abs(jogo.quantidadeDeCasasDoMovimentoBlocoJogador2-jogada.magia.novoValor);
+	}
+	public static int custoControle2(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador2-jogada.magia.novoValor);
+	}
+	public static int custoAlcance2(Jogo jogo, MensagemJogada jogada) {
+		return 3*Math.abs(jogo.alcanceDaMenteJogador2-jogada.magia.novoValor);
+	}
+
+	
+
 }
 
 
