@@ -1,3 +1,4 @@
+
 package auxiliar;
 import modelos.Jogo;
 import modelos.MensagemJogada;
@@ -21,14 +22,36 @@ public class AuxVerificaJogada {
 		return jogo.tabuleiro[localPeloId(jogada.idOrigem).linha][localPeloId(jogada.idOrigem).coluna];
 	}
 		
-	public static boolean movimentoDentroDoAlcancePermitido(LinhaColuna origem, LinhaColuna destino, Jogo jogo) {
-		if(Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimento 
-		   && Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimento) {
-			return true;
+	public static boolean movimentoDentroDoAlcancePermitido(LinhaColuna origem, LinhaColuna destino, Jogo jogo, MensagemJogada jogada) {
+		if(jogo.jogadorDoTurno.equals(jogo.jogador1)) {
+			if(!pecaAPartirDoLocal(jogo, jogada).nomeDaPeca.equals("bloco")
+			   && Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimentoJogador1 
+			   && Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimentoJogador1) {
+				return true;
+			}
+			else if(pecaAPartirDoLocal(jogo, jogada).nomeDaPeca.equals("bloco")
+					&& Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimentoBlocoJogador1 
+					&& Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimentoBlocoJogador1) {
+				return true;
+			}
 		}
+		else {
+			if(!pecaAPartirDoLocal(jogo, jogada).nomeDaPeca.equals("bloco")
+				&& Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimentoJogador2 
+			    && Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimentoJogador2) {
+				return true;
+					}
+			else if(pecaAPartirDoLocal(jogo, jogada).nomeDaPeca.equals("bloco")
+					&& Math.abs(origem.linha - destino.linha) <=jogo.quantidadeDeCasasDoMovimentoBlocoJogador2 
+					&& Math.abs(origem.coluna - destino.coluna) <=jogo.quantidadeDeCasasDoMovimentoBlocoJogador2) {
+				return true;
+			}
+		}
+		
 		
 		return false;
 	}
+	
 	public static boolean jogadaDentroDoTabuleiro(MensagemJogada jogada) {
 		if(localPeloId(jogada.idDestino).linha<=8
 			&& localPeloId(jogada.idDestino).linha>=0
@@ -111,24 +134,24 @@ public class AuxVerificaJogada {
 	
 	public static boolean movimentoDeBlocoValido(Jogo jogo, MensagemJogada jogada) {
 		if(jogada.nomeDeUsuario.equals(jogo.jogador1) 
-		   && jogo.permitidoMoverBloco
+		   && jogo.quantidadeDeCasasDoMovimentoBlocoJogador1>0
 		   && pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("bloco")){
 			for (int i=0;i<jogo.pecasJogador1.length;i++){
 				if(jogo.pecasJogador1[i].nomeDaPeca.equals("materia1")
 				   && jogo.pecasJogador1[i].manaDaPeca>=jogo.quantidadeDeManaParaMoverMago) {
-				   jogo.pecasJogador1[i].manaDaPeca = jogo.pecasJogador1[i].manaDaPeca - jogo.quantidadeDeManaParaMoverMago - jogo.quantidadeDeManaGanhoNoFimDoTurno;
+				   jogo.pecasJogador1[i].manaDaPeca -= (jogo.quantidadeDeManaParaMoverMago + jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1)	;
 				   System.out.println("mana da materia 1:"+ jogo.pecasJogador1[i].manaDaPeca);
 				   return true;
 				}
 			}
 			return false;
 		}
-		else if (jogo.permitidoMoverBloco 
+		else if (jogo.quantidadeDeCasasDoMovimentoBlocoJogador2>0
 				&& pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("bloco")) {
 			for (int i=0;i<jogo.pecasJogador2.length;i++){
 				if(jogo.pecasJogador2[i].nomeDaPeca.equals("materia2")
 				   && jogo.pecasJogador2[i].manaDaPeca>=jogo.quantidadeDeManaParaMoverMago) {
-				   jogo.pecasJogador2[i].manaDaPeca= jogo.pecasJogador2[i].manaDaPeca - jogo.quantidadeDeManaParaMoverMago - jogo.quantidadeDeManaGanhoNoFimDoTurno;
+				   jogo.pecasJogador2[i].manaDaPeca-= (jogo.quantidadeDeManaParaMoverMago + jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2);
 				   System.out.println("mana da materia 2:"+ jogo.pecasJogador2[i].manaDaPeca);
 				   return true;
 				}
@@ -140,7 +163,35 @@ public class AuxVerificaJogada {
 		return true;
 	}
 	
-	private static boolean seTemManaParaAlterarRegraFazAlteracao(Jogo jogo, MensagemJogada jogada) {
+
+	
+	public static boolean pecaNoAlcanceDaMenteDoJogadorDaVez(Jogo jogo, MensagemJogada jogada){
+
+		if(jogo.jogadorDoTurno.equals(jogo.jogador1)){
+			for (int i=0;i<5;i++){
+				if(jogo.pecasJogador1[i].nomeDaPeca.equals("mente1")
+				   && Math.abs(jogo.pecasJogador1[i].linhaDaPeca - localPeloId(jogada.idOrigem).linha )<=jogo.alcanceDaMenteJogador1
+				   && Math.abs(jogo.pecasJogador1[i].colunaDaPeca - localPeloId(jogada.idOrigem).coluna)<=jogo.alcanceDaMenteJogador1){
+					System.out.println("dentro do alcance da peça do jogador 1");
+					return true;	
+				}
+			}
+		}
+		else if(jogo.jogadorDoTurno.equals(jogo.jogador2)) {
+			for (int i=0;i<5;i++){
+				if(jogo.pecasJogador2[i].nomeDaPeca.equals("mente2")
+				   && Math.abs(jogo.pecasJogador2[i].linhaDaPeca - localPeloId(jogada.idOrigem).linha )<=jogo.alcanceDaMenteJogador2
+				   && Math.abs(jogo.pecasJogador2[i].colunaDaPeca - localPeloId(jogada.idOrigem).coluna)<=jogo.alcanceDaMenteJogador2){
+					System.out.println("dentro do alcance da peça do jogador 2");
+					return true;	
+				}
+			}
+			
+		}
+		return false;
+	}
+	
+	public static boolean seTemManaParaAlterarRegraFazAlteracao(Jogo jogo, MensagemJogada jogada) {
 		if(jogada.magia.regra.equals("acao1") &&
 		   pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoAcao1(jogo, jogada) &&
 		   pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("tempo1")) {
@@ -155,14 +206,14 @@ public class AuxVerificaJogada {
 				   jogo.acoesDoJogador2PorTurno=jogada.magia.novoValor;
 				   return true;
 				}
-		else if(jogada.magia.regra.equals("mana1") && 
+		else if(jogada.magia.regra.equals("mana1b") && 
 				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoMana1(jogo, jogada)  &&
 				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("energia1")) {
 			pecaAPartirDoLocal(jogo, jogada).manaDaPeca-=custoMana1(jogo, jogada);
 			jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1=jogada.magia.novoValor;
 			return true;
 		}
-		else if(jogada.magia.regra.equals("mana2") && 
+		else if(jogada.magia.regra.equals("mana2b") && 
 				pecaAPartirDoLocal(jogo,jogada).manaDaPeca >= custoMana2(jogo, jogada)  &&
 				pecaAPartirDoLocal(jogo,jogada).nomeDaPeca.equals("energia2")) {
 			pecaAPartirDoLocal(jogo, jogada).manaDaPeca-=custoMana2(jogo, jogada);
@@ -189,8 +240,6 @@ public class AuxVerificaJogada {
 			pecaAPartirDoLocal(jogo,jogada).manaDaPeca-=custoLocomocaoBloco1(jogo,jogada);
 			System.out.println("novoValor:"+jogada.magia.novoValor);
 			jogo.quantidadeDeCasasDoMovimentoBlocoJogador1=jogada.magia.novoValor;
-			System.out.println("jogador 1quantidade de casas que o bloco pode ser movido pós "
-					+ "alteração:"+jogo.quantidadeDeCasasDoMovimentoBlocoJogador1);
 			return true;
 		}
 		else if(jogada.magia.regra.equals("locomocaoBloco2") &&
@@ -239,11 +288,11 @@ public class AuxVerificaJogada {
 		   jogo.acoesDisponiveisJogadorDoTurno>0 &&
 		   jogadaDentroDoTabuleiro(jogada) &&
 		   (jogadorDaVezEhODonoOriginalDaPeca(jogo,jogada)||
-		   ( jogadorDaVezEhODonoTemporarioDaPeca(jogo,jogada) && pecaAindaSobControleDoDonoTemporario(jogo,jogada) ) )&&
+		   pecaNoAlcanceDaMenteDoJogadorDaVez(jogo,jogada) )&&
 		   pecaTemManaSuficienteParaSeMover(jogo, jogada)&&
 		   casaDeDestinoValida(jogo, jogada)&&
 		   movimentoOrtogonal(jogo, jogada)&&
-		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo)&&
+		   movimentoDentroDoAlcancePermitido(localPeloId(jogada.idOrigem),localPeloId(jogada.idDestino),jogo,jogada)&&
 		   movimentoDeBlocoValido(jogo, jogada)) {
 			return true;}
 		jogo.mensagem="movimento inválido";
@@ -263,8 +312,7 @@ public class AuxVerificaJogada {
 		System.out.println("verificando se a edicao eh valida");
 		if ( jogada.acao.equals("alteracao_regra") &&
 			(jogadorDaVezEhODonoOriginalDaPeca(jogo,jogada)||
-			( jogadorDaVezEhODonoTemporarioDaPeca(jogo,jogada) &&
-			  pecaAindaSobControleDoDonoTemporario(jogo,jogada) ) )
+			 pecaNoAlcanceDaMenteDoJogadorDaVez(jogo,jogada) )
 			) {
 			
 			return seTemManaParaAlterarRegraFazAlteracao(jogo,jogada);

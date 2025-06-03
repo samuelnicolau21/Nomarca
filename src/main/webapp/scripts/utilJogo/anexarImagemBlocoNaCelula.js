@@ -1,4 +1,5 @@
 import {configurarCloneDoContainerMago} from './configurarCloneDoContainerMago.js';
+import {arrastarDaPeca} from './arrastarDaPeca.js';
 
 function anexarImagemBlocoNaCelula(idCelula, urlImagem) {
     const celula = document.getElementById(idCelula);
@@ -13,16 +14,18 @@ function anexarImagemBlocoNaCelula(idCelula, urlImagem) {
         img.alt = 'Bloco na célula';
         img.classList.add('imgBloco');
         img.draggable = true;
-
-        img.addEventListener('dragstart', (e) => {
+		
+		img.addEventListener('dragstart', function (e) {arrastarDaPeca(e, container, idCelula);});
+        
+		/*img.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('idOrigem', idCelula);
 			e.dataTransfer.effectAllowed = 'move';
-			const visualClone = configurarCloneDoContainerMago(container);
+			//const visualClone = configurarCloneDoContainerMago(container);
 			document.body.appendChild(visualClone);
 			e.dataTransfer.setDragImage(visualClone, container.offsetWidth / 2, container.offsetHeight / 2);
 			// Remove clone logo após o uso
 			setTimeout(() => document.body.removeChild(visualClone), 0);
-        });
+        });*/
 
         container.appendChild(img);
         celula.appendChild(container);

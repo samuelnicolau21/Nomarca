@@ -48,8 +48,8 @@ public class Jogo {
 		this.quantidadeDeManaGanhoNoFimDoTurnoJogador2=1;
 		this.quantidadeDeTurnosDeControleInimigoJogador1=0;
 		this.quantidadeDeTurnosDeControleInimigoJogador2=0;
-		this.alcanceDaMenteJogador1=1;
-		this.alcanceDaMenteJogador2=2;
+		this.alcanceDaMenteJogador1=0;
+		this.alcanceDaMenteJogador2=0;
 		this.acoesDoJogador1PorTurno=1;
 		this.acoesDoJogador2PorTurno=1;
 		this.contadorDeTurnos=1;

@@ -9,6 +9,7 @@ public class AuxAtualizacaoJogo {
 		if(jogo.jogador1.equals(jogo.jogadorDoTurno)) {
 			if(jogo.acoesDisponiveisJogadorDoTurno>0) {
 				jogo.acoesDisponiveisJogadorDoTurno--;
+				
 			}
 			if(jogo.acoesDisponiveisJogadorDoTurno==0) {
 				jogo.jogadorDoTurno=jogo.jogador2;
@@ -33,7 +34,10 @@ public class AuxAtualizacaoJogo {
 	public static void atualizaPosicaoDaPecaJogada(MensagemJogada jogada, Jogo jogo){
 		Peca peca=jogo.tabuleiro[AuxVerificaJogada.localPeloId(jogada.idOrigem).linha][AuxVerificaJogada.localPeloId(jogada.idOrigem).coluna];
 		jogo.tabuleiro[AuxVerificaJogada.localPeloId(jogada.idDestino).linha][AuxVerificaJogada.localPeloId(jogada.idDestino).coluna]=peca;
+		jogo.tabuleiro[AuxVerificaJogada.localPeloId(jogada.idDestino).linha][AuxVerificaJogada.localPeloId(jogada.idDestino).coluna].linhaDaPeca=AuxVerificaJogada.localPeloId(jogada.idDestino).linha;
+		jogo.tabuleiro[AuxVerificaJogada.localPeloId(jogada.idDestino).linha][AuxVerificaJogada.localPeloId(jogada.idDestino).coluna].colunaDaPeca=AuxVerificaJogada.localPeloId(jogada.idDestino).coluna;
 		jogo.tabuleiro[AuxVerificaJogada.localPeloId(jogada.idOrigem).linha][AuxVerificaJogada.localPeloId(jogada.idOrigem).coluna]=null;
+		
 		
 	}
 	public static void adicionaManaAsOutrasPecas(MensagemJogada jogada, Jogo jogo) {
@@ -42,7 +46,7 @@ public class AuxAtualizacaoJogo {
 			int tam = jogo.pecasJogador1.length;
 			for (int i = 0; i<tam ; i++) {
 				if(jogo.pecasJogador1[i]!=peca){
-					jogo.pecasJogador1[i].manaDaPeca+=jogo.acoesDoJogador1PorTurno;
+					jogo.pecasJogador1[i].manaDaPeca+=jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1;
 				}
 			}
 		}
@@ -50,7 +54,7 @@ public class AuxAtualizacaoJogo {
 			int tam = jogo.pecasJogador2.length;
 			for (int i = 0; i<tam ; i++) {
 				if(jogo.pecasJogador2[i]!=peca){
-					jogo.pecasJogador2[i].manaDaPeca+=jogo.acoesDoJogador2PorTurno;
+					jogo.pecasJogador2[i].manaDaPeca+=jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2;
 				}
 			}
 		}
