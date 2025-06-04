@@ -3,6 +3,8 @@ import {criaAImagemDaPeca} from './criaAImagemDaPeca.js';
 import {criaOContadorDeMana} from './criaOContadorDeMana.js';
 import {arrastarDaPeca} from './arrastarDaPeca.js';
 import {mostrarMenuDeContexto} from './mostrarMenuDeContexto.js';
+import {mostrarAlcanceMovimento, limparAlcance} from './mostrarAlcanceMovimento.js';
+
 
 let menuContexto=criarMenuDeContexto();
 
@@ -22,6 +24,8 @@ function anexarImagemMagoNaCelula(idCelula, urlImagem, mana) {
 		
 		img.addEventListener('dragstart', function (e) {arrastarDaPeca(e, container, idCelula);});
 		img.addEventListener('contextmenu', function (e) {mostrarMenuDeContexto(e,idCelula,menuContexto)});
+		img.addEventListener('mouseenter', () => mostrarAlcanceMovimento(idCelula));
+		img.addEventListener('mouseleave', () => limparAlcance());
 		
     } else {
         console.log(`Célula ${idCelula} não encontrada`);

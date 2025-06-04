@@ -3,6 +3,8 @@ import { anexarImagemBlocoNaCelula } from './anexarImagemBlocoNaCelula.js';
 import {removerImagemAnexadaDaCelula} from './removerImagemAnexadaDaCelula.js';
 import { gerarPecas } from "./nomePecaSrcImagem.js";
 import {atualizarTextoDaRegra} from './atualizarTextoDaRegra.js';
+import {face} from './criarDado.js';
+import {mudarCorDoDado} from './mudarCorDoDado.js';
 
 
 
@@ -36,6 +38,19 @@ function atualizarJogo(jogo){
 	atualizarTextoDaRegra('controle2b', jogo.quantidadeDeTurnosDeControleInimigoJogador2);
 	atualizarTextoDaRegra('alcance1', jogo.alcanceDaMenteJogador1);
 	atualizarTextoDaRegra('alcance2', jogo.alcanceDaMenteJogador2);
+	
+	if(jogo.jogadorDoTurno===jogo.jogador1){
+		mudarCorDoDado('dado-j1','#0894a6')
+		mudarCorDoDado('dado-j2','#0894a6')
+		
+	}
+	else{
+		mudarCorDoDado('dado-j1','#e1ad0c')
+		mudarCorDoDado('dado-j2','#e1ad0c')
+	}
+	face(jogo.acoesDisponiveisJogadorDoTurno, 'dado-j1');
+	
+	
 	
 	// 2. Adicionar peças com base no novo estado
 	for (let i = 0; i < 9; i++) {

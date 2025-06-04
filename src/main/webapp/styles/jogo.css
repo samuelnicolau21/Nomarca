@@ -8,26 +8,34 @@
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     height: 100vh;
     background-color: rgb(255,255,255,255);
+    padding-top: 20px;
 }
-
+.area-jogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding-left: 20px; /* <<< adicionado */
+}
 .tabuleiro {
     display: grid;
     grid-template-columns: repeat(9, 80px);
     grid-template-rows: repeat(9, 80px);
     gap: 0;
     border: 5px solid rgb(0, 0, 64);
-    width: 730px;
-    height: 730px;
     background-image: url('../imagens/madeira_clara.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: auto;     /* <<< muda de 730px para automático */
+    height: auto;    /* <<< idem */
 }
 
 .celula {
@@ -212,4 +220,87 @@ input:checked + .slider:before {
 .numero-editavel:hover {
 	box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 	background-color: rgba(255, 255, 255, 0.1);
+}
+.scene {
+  width: 100px; /* antes: 50px */
+  height: 100px; /* antes: 50px */
+  perspective: 600px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.dice {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 1s;
+}
+
+.face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 2px solid black;
+  font-size: 40px;
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+  box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.5); /* sombra igual à das peças */
+}
+
+.face1 { transform: rotateY(0deg) translateZ(50px); }
+.face2 { transform: rotateX(-90deg) translateZ(50px); }
+.face3 { transform: rotateY(90deg) translateZ(50px); }
+.face4 { transform: rotateY(-90deg) translateZ(50px); }
+.face5 { transform: rotateX(90deg) translateZ(50px); }
+.face6 { transform: rotateY(180deg) translateZ(50px); }
+
+.dados-jogador1{
+	
+    align-items: center;
+    margin-left: 20px; /* <<< adicione esta linha */
+
+}
+.dados-jogador2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 730px; /* igual ao tabuleiro */
+    width: 80px;
+}
+
+.dados-jogador1 {
+    align-items: center; /* centraliza verticalmente */
+}
+
+.dados-jogador2 {
+    align-items: center; /* centraliza verticalmente */
+}
+
+/* Estilização específica para dados de cada jogador */
+#dado-j1 {
+    filter: drop-shadow(#0000);
+}
+#dado-j2 {
+    filter: drop-shadow(#0000);
+}
+#dado-j1 .face {
+    background-color: #0894a6;
+    color: white;
+}
+#dado-j2 .face {
+    background-color: #0894a6;
+    color: white;
+}
+.celula-alcance-jogador1 {
+    background-color: rgba(0, 150, 255, 0.4); /* azul translúcido */
+    outline: 2px solid #0096ff;
+}
+
+.celula-alcance-jogador2 {
+    background-color: rgba(255, 230, 0, 0.4); /* amarelo translúcido */
+    outline: 2px solid #ffe600;
 }

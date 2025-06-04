@@ -4,7 +4,7 @@ import { avisaMovimentoIlegal } from './avisaMovimentoIlegal.js';
 import { avisaMovimentoLegal} from './avisaMovimentoLegal.js';
 
 let socket;
-
+let jogo;
 function iniciarSocketDeJogada(nomeDeUsuario, idPartida) {
 	if (socket && socket.readyState <= 1) return socket; // já está conectado ou conectando
 
@@ -24,7 +24,7 @@ function iniciarSocketDeJogada(nomeDeUsuario, idPartida) {
 		}
 		
 		else{
-			const jogo = JSON.parse(event.data);
+			 jogo = JSON.parse(event.data);
 			if(jogo.mensagem == "edição válida"){
 						console.log("edição válida");
 						atualizarJogo(jogo);
@@ -44,5 +44,11 @@ function iniciarSocketDeJogada(nomeDeUsuario, idPartida) {
 function getSocketJogada() {
 	return socket;
 }
+function getJogo(){
+	if (!jogo) return;
+	return jogo;
+}
+
 
 export { iniciarSocketDeJogada, getSocketJogada };
+export {getJogo};
