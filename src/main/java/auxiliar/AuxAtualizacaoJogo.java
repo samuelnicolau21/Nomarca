@@ -59,4 +59,23 @@ public class AuxAtualizacaoJogo {
 			}
 		}
 	}
+	public static void contabilizaPontucao(MensagemJogada jogada, Jogo jogo){
+		
+		if( jogo.tabuleiro[4][4]!=null && jogo.tabuleiro[4][4].donoOriginalDaPeca.equals(jogo.jogador1) &&
+			jogo.jogadorDoTurno.equals(jogo.jogador1)){
+			jogo.quantidadeDePontosJogador1++;
+			if(jogo.quantidadeDePontosJogador1==3){
+				jogo.statusDoJogo="vitoria do jogador1";
+			}
+		}
+		else if(jogo.tabuleiro[4][4]!=null && jogo.tabuleiro[4][4].donoOriginalDaPeca.equals(jogo.jogador2)&&
+				jogo.jogadorDoTurno.equals(jogo.jogador2)){
+			jogo.quantidadeDePontosJogador2++;
+			jogo.statusDoJogo="vitoria do jogador1";
+			if(jogo.quantidadeDePontosJogador2==3){
+				jogo.statusDoJogo="vitoria do jogador2";
+			}
+		}
+		
+	}
 }

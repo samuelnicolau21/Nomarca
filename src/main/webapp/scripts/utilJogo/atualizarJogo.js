@@ -42,13 +42,16 @@ function atualizarJogo(jogo){
 	if(jogo.jogadorDoTurno===jogo.jogador1){
 		mudarCorDoDado('dado-j1','#0894a6')
 		mudarCorDoDado('dado-j2','#0894a6')
+		face(jogo.quantidadeDePontosJogador1,'dado-j2')
 		
 	}
 	else{
 		mudarCorDoDado('dado-j1','#e1ad0c')
 		mudarCorDoDado('dado-j2','#e1ad0c')
+		face(jogo.quantidadeDePontosJogador2,'dado-j2')
 	}
 	face(jogo.acoesDisponiveisJogadorDoTurno, 'dado-j1');
+	
 	
 	
 	

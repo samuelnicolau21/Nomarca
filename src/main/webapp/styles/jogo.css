@@ -304,3 +304,14 @@ input:checked + .slider:before {
     background-color: rgba(255, 230, 0, 0.4); /* amarelo translúcido */
     outline: 2px solid #ffe600;
 }
+
+.celula-mente-jogador1 {
+    background-color: rgba(0, 255, 128, 0.3); /* verde claro translúcido */
+    outline: 2px dashed #00ff80;
+}
+
+.celula-mente-jogador2 {
+    background-color: rgba(153, 0, 255, 0.3); /* roxo claro translúcido */
+    outline: 2px dashed #9900ff;
+}
+

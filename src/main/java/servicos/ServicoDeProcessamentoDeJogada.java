@@ -17,6 +17,7 @@ public class ServicoDeProcessamentoDeJogada {
 			AuxAtualizacaoJogo.adicionaManaAsOutrasPecas(jogada,jogo);
 			AuxAtualizacaoJogo.atualizaPosicaoDaPecaJogada(jogada,jogo);
 			AuxAtualizacaoJogo.reduzAcoesJogadorDoTurno(jogada,jogo);
+			AuxAtualizacaoJogo.contabilizaPontucao(jogada, jogo);
 				
 			System.out.println("movimento válido");
 			jogo.mensagem="movimento válido";
