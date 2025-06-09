@@ -15,7 +15,7 @@ public class ConfigJDBC {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        String url = "jdbc:postgresql://VaggJuE9Xr3qlFNGT312Js2LzMy6rFIE@dpg-d133o8juibrs73fpmb00-a.ohio-postgres.render.com:5432/Arcana";
+        String url = "jdbc:postgresql://VaggJuE9Xr3qlFNGT312Js2LzMy6rFIE@dpg-d133o8juibrs73fpmb00-a.ohio-postgres.render.com:5432/arcana";
         String user = "arcana_user";
         String password = "Afta1234.";
         Connection conn = DriverManager.getConnection(url, user, password);
