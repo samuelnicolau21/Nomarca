@@ -1,3 +1,11 @@
+import { enviarAcao } from './utilLogin/enviarAcao.js';
+import { verificarRespostaDoServidor } from './utilLogin/verificarRespostaDoServidor.js';
+import { avisarFechamento } from './utilLogin/avisarFechamento.js';
+import { avisarErro } from './utilLogin/avisarErro.js';
+import { configurarBotoes } from './utilLogin/configurarBotoes.js';
+
+let socket;
+let nomeDeUsuario;
 function enviarLogin(acao) {
     nomeDeUsuario = document.getElementById("nomeDeUsuario").value;
     const senha = document.getElementById("senha").value;
