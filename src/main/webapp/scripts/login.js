@@ -29,3 +29,5 @@ function enviarLogin(acao) {
         alert("Por favor, digite um nome de usuário e senha.");
     }    
 }
+configurarBotoes();
+export {enviarLogin};
