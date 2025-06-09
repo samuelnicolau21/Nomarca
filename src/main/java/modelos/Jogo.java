@@ -33,6 +33,7 @@ public class Jogo {
 	public boolean permitidoMoverBloco;
 	
 	public Jogo(String jogador1, String jogador2){
+		this.mensagem="";
 		this.jogador1 = jogador1;
 		this.jogador2 = jogador2;
 		this.jogadorDoTurno= jogador1;

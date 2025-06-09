@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: arcana-postgres
+    environment:
+      POSTGRES_DB: Arcana          # nome do banco (case sensitive)
+      POSTGRES_USER: postgres      # seu usuário real
+      POSTGRES_PASSWORD: Afta1234. # sua senha real
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  tomcat:
+    build: .
+    container_name: arcana-tomcat
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres            # nome do serviço postgres no docker
+      DB_PORT: 5432
+      DB_NAME: Arcana              # o mesmo nome do banco acima (case sensitive)
+      DB_USER: postgres            # seu usuário real
+      DB_PASSWORD: Afta1234.       # sua senha real
+
+volumes:
+  pgdata:

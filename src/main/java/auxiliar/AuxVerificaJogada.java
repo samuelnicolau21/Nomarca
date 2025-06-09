@@ -117,11 +117,35 @@ public class AuxVerificaJogada {
 		return true;
 	}
 	
+	public static Peca pecaPeloNome(Peca [] pecasDoJogador, String nome){
+		for (int i=0;i<5;i++){
+			if(pecasDoJogador[i].nomeDaPeca.equals(nome)) {
+				return pecasDoJogador[i];
+			}
+		}
+		return null;
+	}
 	public static boolean casaDeDestinoValida(Jogo jogo, MensagemJogada jogada) {
 		if(casaDeDestinoVazia(jogo, jogada)||casaDeDestinoTemPecaDoRival(jogo, jogada)) {
 			return true;
 		}
-		
+		else if(jogo.jogador1.equals(jogo.jogadorDoTurno) &&
+			pecaPeloNome(jogo.pecasJogador1,"espaco1").manaDaPeca>jogo.quantidadeDeManaParaMoverMago &&
+			jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals(jogo.jogador1)&&
+			!jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].nomeDaPeca.equals(pecaAPartirDoLocal(jogo,jogada).nomeDaPeca)){
+			System.out.println("jogador1 fazendo permuta");
+			jogo.mensagem="permutado";
+			return true;
+		}
+		else if(jogo.jogador2.equals(jogo.jogadorDoTurno) &&
+				pecaPeloNome(jogo.pecasJogador2,"espaco2").manaDaPeca>jogo.quantidadeDeManaParaMoverMago &&
+				jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].donoOriginalDaPeca.equals(jogo.jogador2)&&
+				!jogo.tabuleiro[localPeloId(jogada.idDestino).linha][localPeloId(jogada.idDestino).coluna].nomeDaPeca.equals(pecaAPartirDoLocal(jogo,jogada).nomeDaPeca)){
+				System.out.println("jogador2 fazendo permuta");
+				jogo.mensagem="permutado";
+				return true;
+			}
+		System.out.println("Casa de destino inválida");
 		return false;
 	}
 	public static boolean movimentoOrtogonal(Jogo jogo, MensagemJogada jogada) {
@@ -162,9 +186,7 @@ public class AuxVerificaJogada {
 		
 		return true;
 	}
-	
-
-	
+		
 	public static boolean pecaNoAlcanceDaMenteDoJogadorDaVez(Jogo jogo, MensagemJogada jogada){
 
 		if(jogo.jogadorDoTurno.equals(jogo.jogador1)){
@@ -321,42 +343,52 @@ public class AuxVerificaJogada {
 		return false;
 	}
 	
-	
 	public static int custoAcao1(Jogo jogo, MensagemJogada jogada){
-		return 5*Math.abs(jogo.acoesDoJogador1PorTurno-jogada.magia.novoValor);
+		return 15*Math.abs(jogo.acoesDoJogador1PorTurno-jogada.magia.novoValor);
 	}
+	
 	public static int custoMana1(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador1-jogada.magia.novoValor);
 	}
+	
 	public static int custoLocomocao1(Jogo jogo, MensagemJogada jogada) {
 		return 2*Math.abs(jogo.quantidadeDeCasasDoMovimentoJogador1-jogada.magia.novoValor);
 	}
+	
 	public static int custoLocomocaoBloco1(Jogo jogo, MensagemJogada jogada) {
 		return 1*Math.abs(jogo.quantidadeDeCasasDoMovimentoBlocoJogador1-jogada.magia.novoValor);
 	}
+	
 	public static int custoControle1(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador1-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador1-jogada.magia.novoValor);
 	}
+	
 	public static int custoAlcance1(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.alcanceDaMenteJogador1-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.alcanceDaMenteJogador1-jogada.magia.novoValor);
 	}
+	
 	public static int custoAcao2(Jogo jogo, MensagemJogada jogada){
-		return 5*Math.abs(jogo.acoesDoJogador2PorTurno-jogada.magia.novoValor);
+		return 15*Math.abs(jogo.acoesDoJogador2PorTurno-jogada.magia.novoValor);
 	}
+	
 	public static int custoMana2(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.quantidadeDeManaGanhoNoFimDoTurnoJogador2-jogada.magia.novoValor);
 	}
+	
 	public static int custoLocomocao2(Jogo jogo, MensagemJogada jogada) {
 		return 2*Math.abs(jogo.quantidadeDeCasasDoMovimentoJogador2-jogada.magia.novoValor);
 	}
+	
 	public static int custoLocomocaoBloco2(Jogo jogo, MensagemJogada jogada) {
 		return 1*Math.abs(jogo.quantidadeDeCasasDoMovimentoBlocoJogador2-jogada.magia.novoValor);
 	}
+	
 	public static int custoControle2(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador2-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.quantidadeDeTurnosDeControleInimigoJogador2-jogada.magia.novoValor);
 	}
+	
 	public static int custoAlcance2(Jogo jogo, MensagemJogada jogada) {
-		return 3*Math.abs(jogo.alcanceDaMenteJogador2-jogada.magia.novoValor);
+		return 5*Math.abs(jogo.alcanceDaMenteJogador2-jogada.magia.novoValor);
 	}
 
 	
