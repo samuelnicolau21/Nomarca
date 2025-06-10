@@ -24,10 +24,10 @@ function criaOHtmlDaCaixaDeRegras(){
 			<p class="regra2" id="mana2b">todas as peças do jogador 2 que não foram usadas no turno ganham (1).[5]</p>
 			<p class="regra1" id="locomocao1">3.1-Todas as peças do jogador 1 se movem até (1) casa de distância.[2]</p>
 			<p class="regra2" id="locomocao2">3.2-Todas as peças do jogador 2 se movem até (1) casa de distância.[2]</p>
-			<p class="regra1" id="locomocaoBloco1">3.1-O jogador 1 pode mover uma moeda-bloco até (0) casas de distância.{1}[1]</p>
-			<p class="regra2" id="locomocaoBloco2">3.2-O jogador 2 pode mover uma moeda-bloco até (0) casas de distância.{1}[1]</p>	
-			<p class="regra1" id="alcance1">4.1-O alcance da moeda da mente do jogador 1 é (1) casa.[5]</p>
-			<p class="regra2" id="alcance2">4.2-O alcance da moeda da mente do jogador 2 é (1) casa.[5]</p>
+			<p class="regra1" id="locomocaoBloco1">4.1-O jogador 1 pode mover uma moeda-bloco até (0) casas de distância.{1}[1]</p>
+			<p class="regra2" id="locomocaoBloco2">4.2-O jogador 2 pode mover uma moeda-bloco até (0) casas de distância.{1}[1]</p>	
+			<p class="regra1" id="alcance1">5.1-O alcance da moeda da mente do jogador 1 é (1) casa.[5]</p>
+			<p class="regra2" id="alcance2">5.2-O alcance da moeda da mente do jogador 2 é (1) casa.[5]</p>
 			<p class="regra1" id="permutacao1">6.1-O jogador 1 pode permutar a posição de 2 de suas moedas.{2}</p>
 			<p class="regra2" id="permutacao2">6.2-O jogador 2 pode permutar a posição de 2 de suas moedas.{2}</p>
 			<p class="regra1">7 - O jogador que manter uma de suas peças no centro do tabuleiro por 3 rodadas</p>
