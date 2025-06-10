@@ -17,14 +17,13 @@ function adicionarPecasNasPosicoesIniciais(cor_1, cor_2, corBlocos){
 	anexarImagemMagoNaCelula('celula-84', `./imagens/tempo_quente${cor2}.png`,1);
 	anexarImagemMagoNaCelula('celula-85', `./imagens/mente_quente${cor2}.png`,1);
 	anexarImagemMagoNaCelula('celula-86', `./imagens/espaço_quente${cor2}.png`,1);
-	anexarImagemBlocoNaCelula('celula-34', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-43', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-45', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-54', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-53', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-33', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-35', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-55', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-40', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-50', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-60', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-48', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-58', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-68', `./imagens/${corBlocos}.png`);
+
 };
 
 export {adicionarPecasNasPosicoesIniciais};
