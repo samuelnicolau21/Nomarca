@@ -7,8 +7,11 @@ let socket;
 let jogo;
 function iniciarSocketDeJogada(nomeDeUsuario, idPartida) {
 	if (socket && socket.readyState <= 1) return socket; // já está conectado ou conectando
-
-	socket = new WebSocket(`ws://localhost:8080/Arcana_/controladorDeJogo/${nomeDeUsuario}/${idPartida}`);
+	// Detecta protocolo ws ou wss conforme o protocolo da página
+	const protocolo = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+	// Usa o host atual (domínio + porta, se houver)
+	const host = window.location.host;
+	socket = new WebSocket(`${protocolo}${host}/Arcana_/controladorDeJogo/${nomeDeUsuario}/${idPartida}`);
 
 	socket.onopen = () => console.log("Socket de jogada aberto");
 	socket.onclose = () => console.log("Socket de jogada fechado");
