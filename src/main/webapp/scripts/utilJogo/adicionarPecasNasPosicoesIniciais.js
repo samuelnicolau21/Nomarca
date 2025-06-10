@@ -17,12 +17,12 @@ function adicionarPecasNasPosicoesIniciais(cor_1, cor_2, corBlocos){
 	anexarImagemMagoNaCelula('celula-84', `./imagens/tempo_quente${cor2}.png`,1);
 	anexarImagemMagoNaCelula('celula-85', `./imagens/mente_quente${cor2}.png`,1);
 	anexarImagemMagoNaCelula('celula-86', `./imagens/espaço_quente${cor2}.png`,1);
+	anexarImagemBlocoNaCelula('celula-30', `./imagens/${corBlocos}.png`);
 	anexarImagemBlocoNaCelula('celula-40', `./imagens/${corBlocos}.png`);
 	anexarImagemBlocoNaCelula('celula-50', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-60', `./imagens/${corBlocos}.png`);
+	anexarImagemBlocoNaCelula('celula-38', `./imagens/${corBlocos}.png`);
 	anexarImagemBlocoNaCelula('celula-48', `./imagens/${corBlocos}.png`);
 	anexarImagemBlocoNaCelula('celula-58', `./imagens/${corBlocos}.png`);
-	anexarImagemBlocoNaCelula('celula-68', `./imagens/${corBlocos}.png`);
 
 };
 

@@ -69,12 +69,10 @@ public class Jogo {
 		
 		//criando e posicionando os blocos
 		for (int i=0;i<3;i++) {
-			for (int j=0;j<3;j++) {
-				if(i+3==4 && j+3==4) {}
-				else {this.tabuleiro[3+j][i+3]=new Peca("bloco","bloco","ambos","ambos",i+3,i+3);}
-				
+				this.tabuleiro[3+i][0]=new Peca("bloco","bloco","ambos","ambos",3+i,0);
+				this.tabuleiro[3+i][8]=new Peca("bloco","bloco","ambos","ambos",3+i,8);
 			}
-		}
+		
 			
 		//posicionando os axionautas
 		for (int i=0;i<5;i++) {
